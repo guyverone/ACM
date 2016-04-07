@@ -83,6 +83,13 @@ public class FireNet {
                     //find max amount of blockhouses
                     int amount = countBlockHouses(mapArray);
                     System.out.println(amount);
+                    //print the result map for checking
+                    /*for(int i=0; i<mapArray.length; i++) {
+                        for(int j=0; j<mapArray[i].length; j++) {
+                            System.out.print(mapArray[i][j]);
+                        }
+                        System.out.println();
+                    }*/
                 }
             }
         }
