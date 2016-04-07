@@ -1,3 +1,4 @@
+package main;
 
 import java.util.*;
 
@@ -68,10 +69,13 @@ public class FireNet {
             String obj = sc.next();
             if(isObjNum(obj)) {
                 int num = Integer.valueOf(obj);
+                //0 means to end this program.  
                 if(num==0) {
                     sc.close();
                     return;
-                }else if(num<=4){
+                }
+                //the map has most 4*4 square
+                else if(num<=4){
                     mapArray = new String[num][num];
 
                     //initial mapArray with given value
@@ -97,6 +101,12 @@ public class FireNet {
         sc.close();
     }
 
+    /**
+     * check if it is number.
+     * 
+     * @param obj
+     * @return
+     */
     private static boolean isObjNum(String obj) {
         char[] charArgs = obj.toCharArray();
         for(int i=0; i<charArgs.length; i++) {
@@ -107,6 +117,13 @@ public class FireNet {
         return true;
     }
 
+    /**
+     * To build the n*n map by given value. 
+     * 
+     * @param lineValue
+     * @param mapArray
+     * @param i
+     */
     private static void fillValueIntoMapArray(String lineValue, String[][] mapArray, int i) {
         char[] charArray = lineValue.toCharArray();
 
@@ -122,6 +139,11 @@ public class FireNet {
         }
     }
 
+    /**
+     * find the most suited place to place the blockhouse.
+     * 
+     * @param mapArray
+     */
     private static void placeBlockHouses(String[][]mapArray) {
         Map<String,Integer> canGoThroughDirectionsMap = new HashMap<>();
 
@@ -129,21 +151,21 @@ public class FireNet {
             for(int i=0; i<mapArray.length; i++) {
                 for(int j=0; j<mapArray[i].length; j++) {
                     /**
-                     * 0 record how many step can it walk -- the min amount step from witch walk to four direction,that's the place should be placed blockhouse first
+                     * [0] record how many step can it walk -- the min amount step from witch walk to four direction,that's the place should be placed blockhouse first
                      */
                     int[] canWalkStepNum = new int[1];
                     /**
-                     * 0 leftLineCanGoThrough
-                     * 1 rightLineCanGoThrough
-                     * 2 upLineCanGoThrough
-                     * 3 downLineCanGoThrough
+                     * [0] leftLineCanGoThrough
+                     * [1] rightLineCanGoThrough
+                     * [2] upLineCanGoThrough
+                     * [3] downLineCanGoThrough
                      */
                     boolean[] canGoThrough = new boolean[4];
                     /**
-                     * 0 leftLineHaveBlockHouse
-                     * 1 rightLineHaveBlockHouse
-                     * 2 upLineHaveBlockHouse
-                     * 3 downLineHaveBlockHouse
+                     * [0] leftLineHaveBlockHouse
+                     * [1] rightLineHaveBlockHouse
+                     * [2] upLineHaveBlockHouse
+                     * [3] downLineHaveBlockHouse
                      */
                     boolean[] haveBlockHouse = new boolean[4];
                     int canGoThroughDirections = 0;
@@ -196,6 +218,20 @@ public class FireNet {
         }
     }
 
+    /**
+     * check if it's time to stop searching one of four directions for the map has a limited border reason.
+     * And set the amount step of it can walk from its ordinary spot to all four directions into canWalkStepNum array.
+     * And set true or false witch depend on whether there's already a blockhouse on one line of its four directions(a blockhouse separated by wall excluded) into haveBlockHouse array.
+     *
+     * @param canWalkStepNum
+     * @param canGoThrough
+     * @param haveBlockHouse
+     * @param n
+     * @param mapArray
+     * @param x
+     * @param y
+     * @return
+     */
     private static boolean isCallBreak(int[] canWalkStepNum,boolean[] canGoThrough, boolean[] haveBlockHouse, int n, String[][] mapArray, int x, int y) {
         if(mapArray[x][y].equals(".")) {
             canGoThrough[n] = true;
@@ -214,6 +250,13 @@ public class FireNet {
         }
     }
 
+    /**
+     * find the coordination to place the blockhouse by calculating the input map.
+     * return the coordination of a spot has the min amount walk step.
+     *
+     * @param canGoThroughDirectionsMap
+     * @return
+     */
     private static String findCoordinationToPlaceBlockhouse(Map<String,Integer> canGoThroughDirectionsMap) {
         String coordination = null;
         int num = Integer.MAX_VALUE;
@@ -231,11 +274,23 @@ public class FireNet {
         return coordination;
     }
 
+    /**
+     * turn String type of coordination into Integer type and set them into array.
+     *
+     * @param coordination
+     * @param coordinationArray
+     */
     private static void convertCoordinationFromStringToInteger(String coordination,int[] coordinationArray) {
         coordinationArray[0] = Integer.parseInt(String.valueOf(coordination.charAt(0)));
         coordinationArray[1] = Integer.parseInt(String.valueOf(coordination.charAt(1)));
     }
 
+    /**
+     * return the amount of placed blockhouses.
+     *
+     * @param mapArray
+     * @return
+     */
     private static int countBlockHouses(String[][] mapArray) {
         int count = 0;
 
