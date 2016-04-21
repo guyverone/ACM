@@ -67,7 +67,7 @@ public class A1002FireNet {
         while(sc.hasNext()) {
             String obj = sc.next();
             if(isObjNum(obj)) {
-                int num = Integer.valueOf(obj);
+                int num = Integer.valueOf(obj);yyyyyyyy
                 //0 means to end this program.
                 if(num==0) {
                     sc.close();
