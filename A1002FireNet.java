@@ -60,7 +60,7 @@ import java.util.*;
  4
  */
 public class A1002FireNet {
-    public static void main(String[] args) {
+    public static void main(String[] args) {int i=0;
         String[][] mapArray = null;
 
         Scanner sc = new Scanner(System.in);
