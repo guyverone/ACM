@@ -60,14 +60,14 @@ import java.util.*;
  4
  */
 public class A1002FireNet {
-    public static void main(String[] args) {int i=0;
+    public static void main(String[] args) {
         String[][] mapArray = null;
 
         Scanner sc = new Scanner(System.in);
         while(sc.hasNext()) {
             String obj = sc.next();
             if(isObjNum(obj)) {
-                int num = Integer.valueOf(obj);yyyyyyyy
+                int num = Integer.valueOf(obj);
                 //0 means to end this program.
                 if(num==0) {
                     sc.close();
